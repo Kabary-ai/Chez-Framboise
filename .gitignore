@@ -1,0 +1,10 @@
+# --- OS / éditeurs ---
+Thumbs.db
+ehthumbs.db
+.DS_Store
+*.swp
+.vscode/
+.idea/
+
+# --- Claude Code (config locale, chemins absolus) ---
+.claude/

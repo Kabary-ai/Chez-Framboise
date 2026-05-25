@@ -1,0 +1,1084 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Chez Framboise — chambre d'hôtes nichée dans la forêt tropicale de l'est réunionnais, à Salazie." />
+  <title>Chez Framboise · Chambre d'hôtes à Salazie, La Réunion</title>
+
+  <!-- Typographies système (pas de dépendance externe) -->
+  <!-- Cormorant Garamond / Inter peuvent être ajoutées en auto-hébergement pour la production -->
+
+  <style>
+  /* =========================================================
+     Chez Framboise — feuille de style intégrée
+     Mobile-first · variables CSS · grilles asymétriques · reveal
+     ========================================================= */
+
+  /* ---------- 1. Tokens ---------- */
+  :root {
+    --cream:     #FAF7F2;
+    --sand:      #E8DFD0;
+    --ink:       #1A2420;
+    --forest:    #2D4A3E;
+    --moss:      #5A7361;
+    --bark:      #8A8479;
+    --emerald:   #3FA66B;
+    --framboise: #C0395B;
+    --coral:     #E87356;
+
+    --ff-serif: 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, 'Times New Roman', serif;
+    --ff-sans:  system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+    --fs-xs: .78rem;
+    --fs-sm: .92rem;
+    --fs-base: 1rem;
+    --fs-md: 1.15rem;
+    --fs-lg: 1.5rem;
+    --fs-xl: clamp(2rem, 4vw + 1rem, 3.4rem);
+    --fs-hero: clamp(2.6rem, 6vw + 1rem, 5.5rem);
+
+    --gutter: clamp(20px, 4vw, 48px);
+    --section-y: clamp(72px, 10vw, 140px);
+    --radius-sm: 4px;
+    --radius-md: 10px;
+    --radius-lg: 24px;
+    --ease: cubic-bezier(.2,.7,.2,1);
+  }
+
+  /* ---------- 2. Reset ciblé ---------- */
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    font-family: var(--ff-sans);
+    font-size: var(--fs-base);
+    line-height: 1.65;
+    color: var(--ink);
+    background: var(--cream);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  img, svg, iframe { display: block; max-width: 100%; }
+  img { height: auto; }
+  a { color: inherit; text-decoration: none; }
+  ul { list-style: none; padding: 0; margin: 0; }
+  button { font: inherit; cursor: pointer; }
+  :focus-visible { outline: 2px solid var(--framboise); outline-offset: 3px; border-radius: 2px; }
+
+  /* ---------- 3. Typographie ---------- */
+  .title-display {
+    font-family: var(--ff-serif);
+    font-weight: 500;
+    font-size: var(--fs-xl);
+    line-height: 1.1;
+    letter-spacing: -.01em;
+    color: var(--ink);
+    margin: 0 0 24px;
+  }
+  .title-display em { font-style: italic; color: var(--framboise); font-weight: 400; }
+  p { margin: 0 0 1em; color: var(--moss); }
+  p strong { color: var(--forest); font-weight: 500; }
+  .eyebrow {
+    font-family: var(--ff-sans);
+    font-size: var(--fs-xs);
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--framboise);
+    font-weight: 500;
+    margin: 0 0 18px;
+    display: inline-flex; align-items: center;
+  }
+  .eyebrow::before {
+    content: ''; display: inline-block;
+    width: 28px; height: 1px;
+    background: currentColor; margin-right: 12px; opacity: .7;
+  }
+  .eyebrow--light { color: rgba(255,255,255,.85); }
+  .accent { color: var(--framboise); font-style: italic; }
+
+  /* ---------- 4. Conteneur ---------- */
+  .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 var(--gutter); }
+
+  /* ---------- 5. Boutons ---------- */
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 28px;
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    letter-spacing: .04em;
+    border-radius: 999px;
+    transition: transform .25s var(--ease), background .25s var(--ease),
+                color .25s var(--ease), border-color .25s var(--ease),
+                box-shadow .25s var(--ease);
+    white-space: nowrap;
+    border: 1px solid transparent;
+  }
+  .btn--solid { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+  .btn--solid:hover { background: var(--forest); border-color: var(--forest); transform: translateY(-2px); box-shadow: 0 10px 24px -12px rgba(26,36,32,.4); }
+  .btn--accent { background: var(--framboise); border-color: var(--framboise); color: var(--cream); }
+  .btn--accent:hover { background: #a82e4d; border-color: #a82e4d; box-shadow: 0 10px 24px -12px rgba(192,57,91,.5); }
+  .btn--ghost { background: transparent; color: var(--ink); border: 1px solid var(--ink); }
+  .btn--ghost:hover { background: var(--ink); color: var(--cream); }
+  .btn--text { padding: 14px 4px; color: var(--cream); background: transparent; border-radius: 0; border-bottom: 1px solid rgba(250,247,242,.4); }
+  .btn--text:hover { border-bottom-color: var(--cream); }
+
+  /* ---------- 6. Header / Nav ---------- */
+  .site-header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px var(--gutter);
+    transition: background .35s var(--ease), box-shadow .35s var(--ease), padding .35s var(--ease), color .35s var(--ease);
+    color: var(--cream);
+  }
+  .site-header.is-scrolled {
+    background: rgba(250,247,242,.92);
+    -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+    box-shadow: 0 1px 0 rgba(26,36,32,.06);
+    color: var(--ink);
+    padding-top: 12px; padding-bottom: 12px;
+  }
+  .brand { display: inline-flex; align-items: center; gap: 12px; font-family: var(--ff-serif); font-size: 1.5rem; color: inherit; }
+  .brand__mark { width: 28px; height: 28px; color: var(--framboise); flex: none; }
+  .brand__name { font-weight: 500; }
+  .nav { display: flex; align-items: center; gap: 36px; }
+  .nav__list { display: flex; gap: 28px; font-size: var(--fs-sm); }
+  .nav__list a { position: relative; padding: 6px 0; color: inherit; transition: color .2s var(--ease); }
+  .nav__list a::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: 0;
+    height: 1px; background: currentColor;
+    transform: scaleX(0); transform-origin: left;
+    transition: transform .35s var(--ease);
+  }
+  .nav__list a:hover { color: var(--framboise); }
+  .nav__list a:hover::after { transform: scaleX(1); background: var(--framboise); }
+  .nav__cta { padding: 10px 22px; font-size: var(--fs-sm); }
+  .site-header:not(.is-scrolled) .nav__cta { color: var(--cream); border-color: rgba(250,247,242,.6); }
+  .site-header:not(.is-scrolled) .nav__cta:hover { background: var(--cream); color: var(--ink); border-color: var(--cream); }
+
+  /* Burger */
+  .burger {
+    display: none; width: 40px; height: 40px;
+    background: transparent; border: none;
+    flex-direction: column; gap: 6px; justify-content: center; align-items: center;
+    color: inherit;
+  }
+  .burger span { display: block; width: 22px; height: 1.5px; background: currentColor; transition: transform .3s var(--ease), opacity .3s var(--ease); }
+  .burger.is-open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+  .burger.is-open span:nth-child(2) { opacity: 0; }
+  .burger.is-open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+  .mobile-menu {
+    position: fixed; inset: 0; z-index: 90;
+    background: var(--cream);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none;
+    transition: opacity .4s var(--ease);
+  }
+  .mobile-menu.is-open { opacity: 1; pointer-events: auto; }
+  .mobile-menu ul {
+    display: flex; flex-direction: column; gap: 28px;
+    text-align: center; font-family: var(--ff-serif); font-size: 2rem; color: var(--ink);
+  }
+  .mobile-menu a:hover { color: var(--framboise); }
+
+  /* ---------- 7. Hero ---------- */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 140px var(--gutter) 100px;
+    color: var(--cream);
+    overflow: hidden;
+    background: var(--forest); /* couleur de secours si l'image ne charge pas */
+  }
+  .hero__media { position: absolute; inset: 0; z-index: 0; }
+  .hero__media img {
+    width: 100%; height: 100%; object-fit: cover;
+    transform: scale(1.05);
+    transition: transform 8s var(--ease);
+  }
+  .hero.is-ready .hero__media img { transform: scale(1); }
+  .hero__veil {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(180deg, rgba(26,36,32,.35) 0%, rgba(26,36,32,.55) 60%, rgba(26,36,32,.7) 100%),
+      radial-gradient(80% 60% at 30% 30%, rgba(45,74,62,.2), transparent 70%);
+  }
+  .hero__content { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; text-align: center; }
+  .hero__title {
+    font-family: var(--ff-serif);
+    font-size: var(--fs-hero);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -.015em;
+    margin: 0 0 24px;
+  }
+  .hero__title em { font-style: italic; color: var(--emerald); }
+  .hero__lead { font-size: var(--fs-md); font-weight: 300; color: rgba(250,247,242,.92); max-width: 540px; margin: 0 auto 36px; line-height: 1.7; }
+  .hero__cta { display: inline-flex; flex-wrap: wrap; gap: 18px; justify-content: center; }
+  .hero__wave {
+    position: absolute; left: 0; right: 0; bottom: -1px;
+    width: 100%; height: clamp(50px, 7vw, 90px);
+    z-index: 2;
+  }
+
+  /* ---------- 8. Lieu ---------- */
+  .lieu { padding: var(--section-y) 0; }
+  .lieu__grid { display: grid; grid-template-columns: 1fr; gap: 60px; align-items: center; }
+  .lieu__media { position: relative; margin: 0; }
+  .lieu__media img {
+    width: 100%;
+    border-radius: var(--radius-lg);
+    aspect-ratio: 4/5;
+    object-fit: cover;
+    box-shadow: 0 30px 60px -30px rgba(26,36,32,.3);
+  }
+  .leaf-deco {
+    position: absolute;
+    width: 180px; height: 280px;
+    color: var(--emerald);
+    opacity: .18;
+    pointer-events: none;
+    animation: float 9s var(--ease) infinite;
+  }
+  .leaf-deco--1 { top: -50px; right: -50px; transform: rotate(20deg); }
+  @keyframes float {
+    0%, 100% { transform: rotate(20deg) translateY(0); }
+    50%      { transform: rotate(24deg) translateY(-12px); }
+  }
+
+  .stats {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 12px; margin-top: 40px; padding-top: 32px;
+    border-top: 1px solid var(--sand);
+  }
+  .stats li { display: flex; flex-direction: column; gap: 4px; }
+  .stats__num { font-family: var(--ff-serif); font-size: 2.4rem; font-weight: 500; color: var(--framboise); line-height: 1; }
+  .stats__num span { font-size: 1rem; color: var(--bark); font-family: var(--ff-sans); font-weight: 400; margin-left: 2px; }
+  .stats__lbl { font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: .12em; color: var(--bark); }
+
+  /* ---------- 9. Hôtes ---------- */
+  .hotes {
+    padding: var(--section-y) 0;
+    background: linear-gradient(180deg, transparent 0%, var(--sand) 50%, transparent 100%);
+  }
+  .hotes__grid { display: grid; grid-template-columns: 1fr; gap: 60px; align-items: center; }
+  .hotes__media { margin: 0; border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 30px 60px -30px rgba(26,36,32,.35); }
+  .hotes__media img { width: 100%; aspect-ratio: 4/3; object-fit: cover; transition: transform 1.2s var(--ease); }
+  .hotes__media:hover img { transform: scale(1.04); }
+  .quote {
+    margin: 32px 0 0; padding: 24px 28px;
+    border-left: 2px solid var(--framboise);
+    background: rgba(250,247,242,.6);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    font-family: var(--ff-serif); font-style: italic;
+    font-size: 1.15rem; line-height: 1.6; color: var(--forest);
+  }
+  .quote cite {
+    display: block; margin-top: 12px; font-style: normal;
+    font-family: var(--ff-sans); font-size: var(--fs-xs);
+    letter-spacing: .12em; text-transform: uppercase; color: var(--bark);
+  }
+
+  /* ---------- 10. Galerie ---------- */
+  .galerie { padding: var(--section-y) 0; }
+  .section-head { text-align: center; margin-bottom: 60px; }
+  .section-head .eyebrow { justify-content: center; }
+  .section-head__lead { color: var(--bark); font-size: var(--fs-sm); }
+  .gallery { display: grid; grid-template-columns: 1fr; gap: 14px; }
+  .gallery__item {
+    position: relative; margin: 0; overflow: hidden;
+    border-radius: var(--radius-md);
+    cursor: zoom-in; background: var(--sand);
+  }
+  .gallery__item img {
+    width: 100%; height: 100%; object-fit: cover;
+    aspect-ratio: 4/3;
+    transition: transform 1s var(--ease), filter .6s var(--ease);
+  }
+  .gallery__item figcaption {
+    position: absolute; left: 16px; bottom: 14px;
+    color: var(--cream);
+    font-size: var(--fs-xs); letter-spacing: .15em; text-transform: uppercase;
+    background: rgba(26,36,32,.55);
+    padding: 6px 12px; border-radius: 999px;
+    -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+    opacity: 0; transform: translateY(8px);
+    transition: opacity .35s var(--ease), transform .35s var(--ease);
+  }
+  .gallery__item:hover img { transform: scale(1.05); }
+  .gallery__item:hover figcaption { opacity: 1; transform: translateY(0); }
+
+  /* ---------- 11. Services ---------- */
+  .services {
+    padding: var(--section-y) 0;
+    background:
+      radial-gradient(60% 80% at 100% 0%, rgba(63,166,107,.06), transparent 60%),
+      radial-gradient(60% 80% at 0% 100%, rgba(192,57,91,.05), transparent 60%),
+      var(--cream);
+  }
+  .services__grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+  .service {
+    padding: 28px 24px;
+    background: rgba(255,255,255,.6);
+    border: 1px solid var(--sand);
+    border-radius: var(--radius-md);
+    transition: transform .35s var(--ease), border-color .35s var(--ease), box-shadow .35s var(--ease), background .35s var(--ease);
+  }
+  .service:hover {
+    transform: translateY(-3px);
+    border-color: var(--emerald);
+    background: #fff;
+    box-shadow: 0 18px 40px -22px rgba(26,36,32,.2);
+  }
+  .service svg { width: 32px; height: 32px; color: var(--forest); margin-bottom: 16px; transition: color .35s var(--ease); }
+  .service:hover svg { color: var(--framboise); }
+  .service h3 { font-family: var(--ff-serif); font-size: 1.4rem; font-weight: 500; margin: 0 0 8px; color: var(--ink); }
+  .service p { font-size: var(--fs-sm); margin: 0; color: var(--moss); }
+
+  /* ---------- 12. Avis ---------- */
+  .avis { padding: var(--section-y) 0; background: var(--sand); }
+  .avis__grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+  .avis-card {
+    background: var(--cream);
+    border-radius: var(--radius-md);
+    padding: 32px 28px;
+    display: flex; flex-direction: column; gap: 16px;
+    box-shadow: 0 4px 20px -10px rgba(26,36,32,.15);
+    transition: transform .35s var(--ease), box-shadow .35s var(--ease);
+  }
+  .avis-card:hover { transform: translateY(-4px); box-shadow: 0 14px 30px -14px rgba(26,36,32,.22); }
+  .avis-card__stars { color: var(--coral); letter-spacing: 2px; font-size: 1rem; }
+  .avis-card p { font-family: var(--ff-serif); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--ink); margin: 0; }
+  .avis-card footer { margin-top: auto; display: flex; flex-direction: column; gap: 2px; }
+  .avis-card__name { font-weight: 500; color: var(--forest); font-size: var(--fs-sm); }
+  .avis-card__date { font-size: var(--fs-xs); color: var(--bark); }
+
+  /* ---------- 13. Séjour ---------- */
+  .sejour {
+    padding: var(--section-y) 0;
+    background:
+      radial-gradient(50% 80% at 80% 20%, rgba(63,166,107,.18), transparent 70%),
+      radial-gradient(60% 80% at 0% 100%, rgba(192,57,91,.14), transparent 70%),
+      var(--forest);
+    color: var(--cream);
+  }
+  .sejour__grid { display: grid; grid-template-columns: 1fr; gap: 48px; align-items: center; }
+  .sejour__intro p { color: rgba(250,247,242,.78); }
+  .sejour .title-display { color: var(--cream); }
+  .sejour .title-display em { color: var(--coral); }
+  .sejour__card {
+    background: rgba(250,247,242,.06);
+    border: 1px solid rgba(250,247,242,.16);
+    border-radius: var(--radius-lg);
+    padding: 36px 32px;
+    -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+  }
+  .sejour__card-label { font-size: var(--fs-xs); letter-spacing: .22em; text-transform: uppercase; color: var(--coral); margin-bottom: 16px; }
+  .sejour__card ul { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+  .sejour__card li {
+    position: relative; padding-left: 22px;
+    color: rgba(250,247,242,.92); font-size: var(--fs-sm);
+  }
+  .sejour__card li::before {
+    content: ''; position: absolute; left: 0; top: 10px;
+    width: 8px; height: 8px; background: var(--emerald); border-radius: 50%;
+  }
+  .sejour__note { margin: 0; font-size: var(--fs-xs); font-style: italic; color: rgba(250,247,242,.6); border-top: 1px solid rgba(250,247,242,.16); padding-top: 16px; }
+
+  /* ---------- 14. Contact ---------- */
+  .contact { padding: var(--section-y) 0; }
+  .contact__grid { display: grid; grid-template-columns: 1fr; gap: 48px; }
+  .contact__infos {
+    display: flex; flex-direction: column; gap: 18px;
+    margin-top: 32px; padding-top: 32px;
+    border-top: 1px solid var(--sand);
+  }
+  .contact__infos li { display: flex; flex-direction: column; gap: 4px; }
+  .contact__lbl { font-size: var(--fs-xs); letter-spacing: .2em; text-transform: uppercase; color: var(--bark); }
+  .contact__infos a { color: var(--framboise); border-bottom: 1px solid currentColor; padding-bottom: 1px; }
+  .contact__infos a:hover { color: var(--ink); }
+  .contact__map {
+    border-radius: var(--radius-lg); overflow: hidden;
+    box-shadow: 0 30px 60px -30px rgba(26,36,32,.3);
+  }
+  .map-static {
+    background: var(--sand);
+    border-radius: var(--radius-lg);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 16px;
+    padding: 60px 40px;
+    text-align: center;
+    min-height: 340px;
+  }
+  .map-static__pin { width: 56px; height: 72px; }
+  .map-static__label {
+    font-family: var(--ff-serif); font-size: 1.6rem;
+    color: var(--ink); margin: 0; font-weight: 500;
+  }
+  .map-static__coords {
+    font-size: var(--fs-xs); letter-spacing: .18em;
+    color: var(--bark); margin: 0; text-transform: uppercase;
+  }
+  .map-static__btn { margin-top: 8px; }
+
+  /* ---------- 15. Outro ---------- */
+  .outro { padding: var(--section-y) 0; background: transparent; text-align: center; }
+  .outro__inner { max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 28px; }
+  .outro__leaf { width: 64px; height: 64px; color: var(--emerald); opacity: .8; }
+  .outro__text { font-family: var(--ff-serif); font-style: italic; font-size: clamp(1.4rem, 2vw + 1rem, 2rem); color: var(--forest); line-height: 1.5; margin: 0; }
+
+  /* ---------- 16. Footer ---------- */
+  .footer { background: var(--ink); color: rgba(250,247,242,.72); padding: 50px 0 30px; }
+  .footer__inner { display: grid; grid-template-columns: 1fr; gap: 28px; text-align: center; }
+  .footer__brand .brand__name { font-family: var(--ff-serif); color: var(--cream); font-size: 1.6rem; display: block; }
+  .footer__brand p { margin-top: 6px; font-size: var(--fs-xs); letter-spacing: .15em; text-transform: uppercase; color: rgba(250,247,242,.45); }
+  .footer__links { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; font-size: var(--fs-sm); }
+  .footer__links a:hover { color: var(--coral); }
+  .footer__copy { margin: 0; font-size: var(--fs-xs); color: rgba(250,247,242,.4); }
+
+  /* ---------- 17. Lightbox ---------- */
+  .lightbox {
+    position: fixed; inset: 0; z-index: 200;
+    background: rgba(15,20,18,.92);
+    display: flex; align-items: center; justify-content: center;
+    padding: 40px;
+    opacity: 0; pointer-events: none;
+    transition: opacity .35s var(--ease);
+  }
+  .lightbox.is-open { opacity: 1; pointer-events: auto; }
+  .lightbox img {
+    max-width: 100%; max-height: 90vh;
+    object-fit: contain;
+    border-radius: var(--radius-md);
+    box-shadow: 0 40px 80px -20px rgba(0,0,0,.5);
+    transform: scale(.96);
+    transition: transform .4s var(--ease);
+  }
+  .lightbox.is-open img { transform: scale(1); }
+  .lightbox__close {
+    position: absolute; top: 18px; right: 22px;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(250,247,242,.4);
+    background: transparent; color: var(--cream);
+    font-size: 1.5rem; line-height: 1;
+    display: flex; align-items: center; justify-content: center;
+    transition: background .25s var(--ease), border-color .25s var(--ease);
+  }
+  .lightbox__close:hover { background: rgba(250,247,242,.1); border-color: var(--cream); }
+
+  /* ---------- 18. Reveal ---------- */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .9s var(--ease), transform .9s var(--ease); will-change: opacity, transform; }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+  /* ---------- 18b. Palmes d'arrière-plan animées ---------- */
+  /* Conteneur fixe en arrière-plan : reste en place pendant le scroll */
+  .bg-palms {
+    position: fixed; inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+    color: var(--forest);
+  }
+  /* Wrapper qui porte la position et la rotation de base de la palme */
+  .palm {
+    position: absolute;
+    width: 55vmin; height: 55vmin;
+    opacity: .13;
+  }
+  /* Le SVG interne porte uniquement l'animation de balancement,
+     ainsi la rotation de base et l'animation ne se marchent pas dessus */
+  .palm svg { width: 100%; height: 100%; transform-origin: 50% 95%; }
+
+  /* Positions des 4 palmes — chaque palme dépasse à moitié de l'écran */
+  .palm--1 { top: -10vmin;  right: -12vmin; transform: rotate(155deg); }
+  .palm--1 svg { animation: sway-a 7s ease-in-out infinite; }
+
+  .palm--2 { bottom: -12vmin; left: -10vmin; width: 60vmin; height: 60vmin; transform: rotate(-25deg); }
+  .palm--2 svg { animation: sway-b 6.5s ease-in-out infinite; }
+
+  .palm--3 { top: 55vh; right: -18vmin; width: 45vmin; height: 45vmin; transform: rotate(125deg); }
+  .palm--3 svg { animation: sway-c 7.5s ease-in-out infinite; }
+
+  .palm--4 { top: 30vh; left: -14vmin; width: 40vmin; height: 40vmin; transform: rotate(-50deg); }
+  .palm--4 svg { animation: sway-d 6.8s ease-in-out infinite; }
+
+  /* Balancements désynchronisés — amplitude ~3-4° pour un "vent léger" */
+  @keyframes sway-a { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
+  @keyframes sway-b { 0%, 100% { transform: rotate(2deg); }  50% { transform: rotate(-4deg); } }
+  @keyframes sway-c { 0%, 100% { transform: rotate(-2deg); } 50% { transform: rotate(4deg); } }
+  @keyframes sway-d { 0%, 100% { transform: rotate(3deg); }  50% { transform: rotate(-3deg); } }
+
+  /* Le contenu principal passe au-dessus des palmes */
+  main, .footer { position: relative; z-index: 1; }
+
+  @media (prefers-reduced-motion: reduce) {
+    /* On désactive les animations dynamiques, mais on garde le balancement
+       des palmes (3° d'amplitude, sous le seuil WCAG) car il participe
+       à l'identité visuelle sans risque vestibulaire. */
+    .reveal, .reveal.is-visible, .hero__media img, .leaf-deco {
+      transition: none !important; animation: none !important; transform: none !important; opacity: 1 !important;
+    }
+  }
+
+  /* ---------- 19. Responsive ---------- */
+  @media (min-width: 640px) {
+    .gallery { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .services__grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .avis__grid { grid-template-columns: repeat(2, 1fr); }
+    .footer__inner { grid-template-columns: 1fr auto 1fr; text-align: left; align-items: center; }
+    .footer__copy { text-align: right; }
+    .footer__links { justify-content: center; }
+  }
+  @media (min-width: 900px) {
+    .lieu__grid { grid-template-columns: 1.05fr 1fr; gap: 80px; }
+    .hotes__grid { grid-template-columns: 1fr 1.1fr; gap: 80px; }
+    .gallery { grid-template-columns: repeat(3, 1fr); grid-auto-rows: 220px; }
+    .gallery__item img { aspect-ratio: auto; height: 100%; }
+    .gallery__item--tall { grid-row: span 2; }
+    .gallery__item--wide { grid-column: span 2; }
+    .services__grid { grid-template-columns: repeat(4, 1fr); }
+    .avis__grid { grid-template-columns: repeat(3, 1fr); }
+    .sejour__grid { grid-template-columns: 1fr 1fr; gap: 80px; }
+    .contact__grid { grid-template-columns: 1fr 1.1fr; gap: 80px; align-items: stretch; }
+  }
+  @media (min-width: 1100px) { .gallery { grid-auto-rows: 260px; gap: 18px; } }
+  @media (max-width: 899.98px) { .nav { display: none; } .burger { display: flex; } }
+  @media (max-width: 480px) {
+    .hero { padding: 120px 20px 80px; }
+    .stats__num { font-size: 1.8rem; }
+    .btn { padding: 12px 22px; font-size: var(--fs-xs); }
+    .quote { padding: 20px 22px; font-size: 1rem; }
+  }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================ PALMES D'ARRIÈRE-PLAN ============================ -->
+  <!-- 4 palmes SVG fixes en fond, balancement désynchronisé pour évoquer la brise tropicale -->
+  <div class="bg-palms" aria-hidden="true">
+    <div class="palm palm--1">
+      <svg viewBox="0 0 200 280">
+        <!-- Tige centrale courbe -->
+        <path d="M100 280 Q97 200 93 130 Q90 60 86 8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        <!-- Folioles côté gauche -->
+        <path d="M99 245 Q70 232 32 215" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M97 218 Q62 198 22 178" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M95 188 Q58 170 18 152" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M93 158 Q58 142 22 130" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M91 128 Q60 116 28 108" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M89 98 Q65 90 40 88" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M88 70 Q72 64 55 64" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M87 42 Q78 38 65 40" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <!-- Folioles côté droit -->
+        <path d="M101 245 Q132 232 168 215" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M103 218 Q138 198 178 178" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M105 188 Q142 170 182 152" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M107 158 Q142 142 178 130" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M109 128 Q140 116 172 108" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M111 98 Q135 90 160 88" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M112 70 Q128 64 145 64" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M113 42 Q122 38 135 40" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
+    </div>
+
+    <div class="palm palm--2">
+      <svg viewBox="0 0 200 280">
+        <path d="M100 280 Q97 200 93 130 Q90 60 86 8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M99 245 Q70 232 32 215" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M97 218 Q62 198 22 178" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M95 188 Q58 170 18 152" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M93 158 Q58 142 22 130" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M91 128 Q60 116 28 108" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M89 98 Q65 90 40 88" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M88 70 Q72 64 55 64" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M87 42 Q78 38 65 40" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M101 245 Q132 232 168 215" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M103 218 Q138 198 178 178" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M105 188 Q142 170 182 152" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M107 158 Q142 142 178 130" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M109 128 Q140 116 172 108" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M111 98 Q135 90 160 88" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M112 70 Q128 64 145 64" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M113 42 Q122 38 135 40" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
+    </div>
+
+    <div class="palm palm--3">
+      <svg viewBox="0 0 200 280">
+        <path d="M100 280 Q97 200 93 130 Q90 60 86 8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M99 245 Q70 232 32 215" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M97 218 Q62 198 22 178" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M95 188 Q58 170 18 152" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M93 158 Q58 142 22 130" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M91 128 Q60 116 28 108" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M89 98 Q65 90 40 88" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M88 70 Q72 64 55 64" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M87 42 Q78 38 65 40" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M101 245 Q132 232 168 215" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M103 218 Q138 198 178 178" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M105 188 Q142 170 182 152" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M107 158 Q142 142 178 130" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M109 128 Q140 116 172 108" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M111 98 Q135 90 160 88" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M112 70 Q128 64 145 64" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M113 42 Q122 38 135 40" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
+    </div>
+
+    <div class="palm palm--4">
+      <svg viewBox="0 0 200 280">
+        <path d="M100 280 Q97 200 93 130 Q90 60 86 8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M99 245 Q70 232 32 215" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M97 218 Q62 198 22 178" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M95 188 Q58 170 18 152" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M93 158 Q58 142 22 130" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M91 128 Q60 116 28 108" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M89 98 Q65 90 40 88" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M88 70 Q72 64 55 64" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M87 42 Q78 38 65 40" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M101 245 Q132 232 168 215" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M103 218 Q138 198 178 178" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M105 188 Q142 170 182 152" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M107 158 Q142 142 178 130" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M109 128 Q140 116 172 108" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M111 98 Q135 90 160 88" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M112 70 Q128 64 145 64" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M113 42 Q122 38 135 40" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ============================ NAVIGATION ============================ -->
+  <header class="site-header" data-header>
+    <a href="#top" class="brand">
+      <svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M16 2C9 4 4 10 4 18c0 6 4 11 12 12 8-1 12-6 12-12 0-8-5-14-12-16Z" fill="none" stroke="currentColor" stroke-width="1.4"/>
+        <path d="M16 4v26M9 12c3 1 5 3 7 6M23 12c-3 1-5 3-7 6" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/>
+      </svg>
+      <span class="brand__name">Chez Framboise</span>
+    </a>
+
+    <nav class="nav" aria-label="Principale">
+      <ul class="nav__list">
+        <li><a href="#lieu">Le lieu</a></li>
+        <li><a href="#galerie">Galerie</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#sejour">Séjour</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="#sejour" class="btn btn--ghost nav__cta">Réserver</a>
+    </nav>
+
+    <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false" data-burger>
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <div class="mobile-menu" data-mobile-menu aria-hidden="true">
+    <ul>
+      <li><a href="#lieu">Le lieu</a></li>
+      <li><a href="#galerie">Galerie</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#sejour">Séjour</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+
+  <main id="top">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero__media">
+        <img src="images/1.jpg" alt="Panorama du cirque de Salazie, montagnes vertes et brume tropicale" />
+        <div class="hero__veil" aria-hidden="true"></div>
+      </div>
+      <div class="hero__content">
+        <p class="eyebrow eyebrow--light reveal">Chambre d'hôtes · Salazie · La Réunion</p>
+        <h1 class="hero__title reveal">
+          Au creux de la <em>forêt</em><br/>
+          un refuge nommé <span class="accent">Framboise</span>.
+        </h1>
+        <div class="hero__cta reveal">
+          <a href="#sejour" class="btn btn--solid">Réserver un séjour</a>
+          <a href="#lieu" class="btn btn--text">Découvrir le lieu →</a>
+        </div>
+      </div>
+      <svg class="hero__wave" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,60 C240,90 480,20 720,40 C960,60 1200,90 1440,40 L1440,90 L0,90 Z" fill="var(--cream)"/>
+      </svg>
+    </section>
+
+    <!-- LIEU -->
+    <section id="lieu" class="lieu">
+      <div class="container lieu__grid">
+        <div class="lieu__text reveal">
+          <p class="eyebrow">Bienvenue</p>
+          <h2 class="title-display">
+            Une maison <em>simple et vivante</em>,<br/>
+            entre le cirque et la mer.
+          </h2>
+          <p>
+            À Salazie, la pluie chuchote presque tous les jours et la forêt s'épaissit
+            à perte de vue. C'est là, à quelques minutes du Cirque, que Françoise et
+            Fred ouvrent leur maison aux voyageurs en quête de calme et d'authenticité.
+          </p>
+          <p>
+            Chambres lumineuses, jardin créole, terrasse pour le petit-déjeuner, et
+            cette vue sur la montagne qui change d'humeur à chaque heure du jour —
+            <strong>Chez Framboise</strong> est un point de départ pour la randonnée
+            et un point d'ancrage pour le repos.
+          </p>
+          <ul class="stats" role="list">
+            <li><span class="stats__num">9,4<span>/10</span></span><span class="stats__lbl">Note Booking.com</span></li>
+            <li><span class="stats__num">200<span>+</span></span><span class="stats__lbl">Voyageurs accueillis</span></li>
+            <li><span class="stats__num">5<span>&nbsp;ans</span></span><span class="stats__lbl">D'hospitalité</span></li>
+          </ul>
+        </div>
+        <figure class="lieu__media reveal">
+          <img src="images/ext%202.jpg" alt="Jardin tropical de Chez Framboise avec palmier et végétation dense" />
+        </figure>
+      </div>
+    </section>
+
+    <!-- HÔTES -->
+    <section class="hotes">
+      <div class="container hotes__grid">
+        <figure class="hotes__media reveal">
+          <img src="images/21.jpg" alt="Portrait de Françoise et Fred, les hôtes, dans leur jardin tropical" />
+        </figure>
+        <div class="hotes__text reveal">
+          <p class="eyebrow">Vos hôtes</p>
+          <h2 class="title-display"><em>Françoise &amp; Fred</em></h2>
+          <p>
+            Ils accueillent, ils conseillent, ils racontent. Une cuisine du jardin,
+            des sentiers gardés en mémoire, et cette attention discrète qui
+            transforme une chambre en escale.
+          </p>
+          <blockquote class="quote">
+            « L'accueil chaleureux et discret de Françoise et Fred,
+            la propreté du lieu, l'aménagement du logement et le petit-déjeuner
+            fabuleux. »
+            <cite>— Céline, Booking.com</cite>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALERIE -->
+    <section id="galerie" class="galerie">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">Découvrir</p>
+          <h2 class="title-display">Le gîte en <em>images</em></h2>
+          <p class="section-head__lead">Cliquez sur une image pour l'agrandir.</p>
+        </header>
+        <div class="gallery" data-gallery>
+          <figure class="gallery__item gallery__item--tall reveal">
+            <img src="images/chambre%201.jpg" alt="Chambre lumineuse avec lit double et fenêtre ouverte" loading="lazy"/>
+          </figure>
+          <figure class="gallery__item reveal">
+            <img src="images/salon.jpg" alt="Salon-véranda spacieux avec rideaux à motifs tropicaux" loading="lazy"/>
+          </figure>
+          <figure class="gallery__item reveal">
+            <img src="images/chambre%202.jpg" alt="Seconde chambre avec lambris bois et lit double" loading="lazy"/>
+          </figure>
+          <figure class="gallery__item gallery__item--wide reveal">
+            <img src="images/ext%201.jpg" alt="Jardin créole avec banc en bois et arbustes tropicaux" loading="lazy"/>
+          </figure>
+          <figure class="gallery__item reveal">
+            <img src="images/serre.jpg" alt="Serre abritant fougères et orchidées" loading="lazy"/>
+          </figure>
+          <figure class="gallery__item gallery__item--tall reveal">
+            <img src="images/22.jpg" alt="Cascade descendant de la falaise dans la forêt tropicale" loading="lazy"/>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="services">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">Équipements &amp; services</p>
+          <h2 class="title-display">Tout ce qu'il faut, <em>rien de superflu</em></h2>
+        </header>
+        <ul class="services__grid" role="list">
+          <li class="service reveal">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 13c4-4 10-4 14 0M8 16c2-2 6-2 8 0M11 19a1.5 1.5 0 1 0 2 0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            <h3>Wi-Fi gratuit</h3>
+            <p>Connexion stable dans toute la maison, pour partager vos clichés à la volée.</p>
+          </li>
+          <li class="service reveal">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-6 8 6v9a1 1 0 0 1-1 1h-4v-6h-6v6H5a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            <h3>Parking privé</h3>
+            <p>Stationnement gratuit et sécurisé sur la propriété, à l'ombre des arbres.</p>
+          </li>
+          <li class="service reveal">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 18h14M7 18V9a5 5 0 0 1 10 0v9M10 6l2-3 2 3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <h3>Petit-déjeuner</h3>
+            <p>Continental généreux, fruits du jardin et confitures maison selon la saison.</p>
+          </li>
+          <li class="service reveal">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 14h6l-1 7h-4z M6 21l3-7 3 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            <h3>Accès PMR</h3>
+            <p>Équipements adaptés aux personnes à mobilité réduite, sur demande à la réservation.</p>
+          </li>
+          <li class="service reveal">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18h16M6 18V8h12v10M9 18v-6h6v6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            <h3>Terrasse &amp; jardin</h3>
+            <p>Un coin pour lire, prendre un thé, écouter la pluie tomber sur les feuilles.</p>
+          </li>
+          <li class="service reveal">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14c0-5 4-9 9-9 1 5-3 9-9 9zM4 14c0 3 3 6 7 6 0-3-3-6-7-6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            <h3>Espace non-fumeur</h3>
+            <p>Toute la maison est non-fumeur. Un coin extérieur reste disponible.</p>
+          </li>
+          <li class="service reveal">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2 6h6l-5 4 2 7-5-4-5 4 2-7-5-4h6z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+            <h3>Conseils sur-mesure</h3>
+            <p>Vos hôtes connaissent chaque sentier, chaque table créole de la région.</p>
+          </li>
+          <li class="service reveal">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18c3-6 9-9 18-9M6 21c2-4 6-7 12-8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            <h3>Randonnée à proximité</h3>
+            <p>À 4,4 km du Cirque de Salazie, point de départ idéal pour les sentiers.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- AVIS -->
+    <section class="avis">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">Avis voyageurs</p>
+          <h2 class="title-display">Ils sont passés <em>par ici</em></h2>
+        </header>
+        <div class="avis__grid">
+          <article class="avis-card reveal">
+            <div class="avis-card__stars" aria-label="Note 5 sur 5">★ ★ ★ ★ ★</div>
+            <p>« La gentillesse des hôtes, les conseils et recommandations
+              et le petit déjeuner était superbe. »</p>
+            <footer>
+              <span class="avis-card__name">Jean</span>
+              <span class="avis-card__date">Mars 2026</span>
+            </footer>
+          </article>
+          <article class="avis-card reveal">
+            <div class="avis-card__stars" aria-label="Note 5 sur 5">★ ★ ★ ★ ★</div>
+            <p>« Petit déjeuner et table d'hôte extras ! Très bon séjour,
+              hôtes attentifs qui prennent le temps de répondre à nos questions
+              et à donner des conseils. Tout était parfait. »</p>
+            <footer>
+              <span class="avis-card__name">Valérie</span>
+              <span class="avis-card__date">Février 2026</span>
+            </footer>
+          </article>
+          <article class="avis-card reveal">
+            <div class="avis-card__stars" aria-label="Note 5 sur 5">★ ★ ★ ★ ★</div>
+            <p>« L'accueil chaleureux et discret de Françoise et Fred,
+              la propreté du lieu, l'aménagement du logement et le petit
+              déjeuner fabuleux. »</p>
+            <footer>
+              <span class="avis-card__name">Céline</span>
+              <span class="avis-card__date">Février 2026</span>
+            </footer>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SÉJOUR -->
+    <section id="sejour" class="sejour">
+      <div class="container sejour__grid">
+        <div class="sejour__intro reveal">
+          <p class="eyebrow eyebrow--light">Séjour &amp; tarifs</p>
+          <h2 class="title-display">Un séjour, <em>tout compris</em>.</h2>
+          <p>
+            Nos chambres se réservent à la nuit, petit-déjeuner inclus.
+            Les disponibilités sont mises à jour en temps réel sur Booking.com —
+            réservation immédiate, paiement sécurisé.
+          </p>
+          <a href="https://www.booking.com/hotel/re/chez-framboise.fr.html"
+             target="_blank" rel="noopener" class="btn btn--solid btn--accent">
+            Vérifier les disponibilités →
+          </a>
+        </div>
+        <div class="sejour__card reveal">
+          <p class="sejour__card-label">Inclus à chaque séjour</p>
+          <ul>
+            <li>Une chambre privative avec literie soignée</li>
+            <li>Petit-déjeuner continental servi en terrasse</li>
+            <li>Accès Wi-Fi gratuit dans toute la maison</li>
+            <li>Parking privé sur la propriété</li>
+            <li>Conseils randonnée &amp; itinéraires</li>
+          </ul>
+          <p class="sejour__note">
+            Table d'hôtes ponctuellement sur demande — pensez à réserver à l'avance.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="contact">
+      <div class="container contact__grid">
+        <div class="contact__text reveal">
+          <p class="eyebrow">Nous trouver</p>
+          <h2 class="title-display">À <em>Salazie</em>,<br/>au creux du vert.</h2>
+          <p>
+            La maison se rejoint en voiture depuis Saint-Denis en environ 45 minutes.
+            Pour toute question avant votre arrivée, vous pouvez aussi nous écrire
+            via la plateforme Booking.com.
+          </p>
+          <ul class="contact__infos" role="list">
+            <li><span class="contact__lbl">Adresse</span><span>Salazie, La Réunion (97433)</span></li>
+            <li><span class="contact__lbl">Réservation</span>
+              <a href="https://www.booking.com/hotel/re/chez-framboise.fr.html" target="_blank" rel="noopener">Booking.com →</a>
+            </li>
+            <li><span class="contact__lbl">Coordonnées GPS</span><span>−21,047374, 55,529125</span></li>
+          </ul>
+        </div>
+        <div class="contact__map reveal">
+          <div class="map-static">
+            <svg class="map-static__pin" viewBox="0 0 48 64" aria-hidden="true">
+              <path d="M24 2C13.5 2 5 10.5 5 21c0 14 19 41 19 41s19-27 19-41C43 10.5 34.5 2 24 2Z" fill="var(--framboise)" opacity=".15" stroke="var(--framboise)" stroke-width="2"/>
+              <circle cx="24" cy="21" r="7" fill="var(--framboise)"/>
+            </svg>
+            <p class="map-static__label">Salazie, La Réunion</p>
+            <p class="map-static__coords">−21,047374 · 55,529125</p>
+            <a href="https://maps.google.com/?q=-21.047373618236087,55.52912509439723"
+               target="_blank" rel="noopener" class="btn btn--solid map-static__btn">
+              Ouvrir dans Google Maps →
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OUTRO -->
+    <section class="outro">
+      <div class="container outro__inner reveal">
+        <svg class="outro__leaf" viewBox="0 0 100 100" aria-hidden="true">
+          <path d="M50 5 C20 30 20 70 50 95 C80 70 80 30 50 5 Z" fill="none" stroke="currentColor" stroke-width="1"/>
+          <path d="M50 5 L50 95" stroke="currentColor" stroke-width="0.8"/>
+          <path d="M50 30 C40 35 35 45 35 55 M50 55 C60 60 65 70 65 80" fill="none" stroke="currentColor" stroke-width="0.8"/>
+        </svg>
+        <p class="outro__text">
+          Au plaisir de vous accueillir bientôt chez nous.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <span class="brand__name">Chez Framboise</span>
+        <p>Chambre d'hôtes · Salazie, La Réunion</p>
+      </div>
+      <ul class="footer__links">
+        <li><a href="#lieu">Le lieu</a></li>
+        <li><a href="#galerie">Galerie</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#sejour">Réserver</a></li>
+      </ul>
+      <p class="footer__copy">© 2026 · Chez Framboise · Tous droits réservés</p>
+    </div>
+  </footer>
+
+  <div class="lightbox" data-lightbox aria-hidden="true" role="dialog" aria-label="Image agrandie">
+    <button class="lightbox__close" aria-label="Fermer" data-lightbox-close>×</button>
+    <img alt="" />
+  </div>
+
+  <script>
+  /* =========================================================
+     Chez Framboise — interactions
+     - Header solide au scroll
+     - Burger mobile
+     - Reveal au scroll (IntersectionObserver)
+     - Hero : zoom-out subtil après chargement
+     - Lightbox galerie
+     ========================================================= */
+  (() => {
+    'use strict';
+
+    /* 1. Header au scroll */
+    const header = document.querySelector('[data-header]');
+    const onScroll = () => header && header.classList.toggle('is-scrolled', window.scrollY > 40);
+    document.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    /* 2. Menu burger */
+    const burger = document.querySelector('[data-burger]');
+    const mobileMenu = document.querySelector('[data-mobile-menu]');
+    const toggleMenu = (open) => {
+      if (!burger || !mobileMenu) return;
+      const willOpen = open ?? !burger.classList.contains('is-open');
+      burger.classList.toggle('is-open', willOpen);
+      mobileMenu.classList.toggle('is-open', willOpen);
+      burger.setAttribute('aria-expanded', String(willOpen));
+      mobileMenu.setAttribute('aria-hidden', String(!willOpen));
+      document.body.style.overflow = willOpen ? 'hidden' : '';
+    };
+    burger?.addEventListener('click', () => toggleMenu());
+    mobileMenu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggleMenu(false)));
+
+    /* 3. Hero ready */
+    const hero = document.querySelector('.hero');
+    requestAnimationFrame(() => hero?.classList.add('is-ready'));
+
+    /* 4. Reveal au scroll */
+    const reveals = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => entry.target.classList.add('is-visible'), Math.min(i * 60, 240));
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      reveals.forEach(el => io.observe(el));
+    } else {
+      reveals.forEach(el => el.classList.add('is-visible'));
+    }
+
+    /* 5. Lightbox */
+    const lightbox = document.querySelector('[data-lightbox]');
+    const lightboxImg = lightbox?.querySelector('img');
+    const closeBtn = lightbox?.querySelector('[data-lightbox-close]');
+    const openLightbox = (src, alt) => {
+      if (!lightbox || !lightboxImg) return;
+      lightboxImg.src = src;
+      lightboxImg.alt = alt || '';
+      lightbox.classList.add('is-open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    };
+    const closeLightbox = () => {
+      if (!lightbox) return;
+      lightbox.classList.remove('is-open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    };
+    document.querySelectorAll('.gallery__item img').forEach(img => {
+      img.addEventListener('click', () => openLightbox(img.src, img.alt));
+    });
+    lightbox?.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+    closeBtn?.addEventListener('click', closeLightbox);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') { toggleMenu(false); closeLightbox(); }
+    });
+  })();
+  </script>
+</body>
+</html>
