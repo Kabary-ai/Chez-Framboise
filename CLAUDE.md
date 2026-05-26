@@ -197,16 +197,73 @@ Après push, GitHub Pages reconstruit le site en 1-2 min.
 - ✅ Animation palmes en fond
 - ✅ Suppression des éléments superflus (légendes galerie, lead hero, leaf-deco)
 
-### V2 — en cours
+### V1.1 — en ligne (session 2)
 
-À démarrer : choix du clin d'œil Madagascar (cf. ci-dessus).
+- ✅ Sections réordonnées : Hôtes déplacés *après* les avis
+- ✅ Section avis refondue en widget façon Booking.com (score 9,4 sur badge
+  bleu Booking #003580, cards entièrement cliquables vers Booking, CTA #0071c2)
+
+### V2 — branche `v2-direction` sur GitHub (session 3)
+
+Suite à un retour "IA SLOP" (texte trop générique + visuel trop template),
+réécriture complète sur **branche séparée** pour ne pas écraser la V1 en ligne.
+
+Décisions du propriétaire pour cette V2 :
+- ❌ Madagascar : **pas mentionné dans le texte** (peut-être plus tard)
+- ✅ Signature visuelle malgache discrète :
+  - Mark **Ravinala** (l'arbre du voyageur) en silhouette dans le logo
+  - **Mini-tricolore** encodé dans la palette existante (ivoire / framboise /
+    forest) — apparaît dans la sejour-card et dans le footer
+- ✅ **Petit-déjeuner** : seul élément culinaire mis en avant (section dédiée)
+
+Changements V2 vs V1 :
+- Hero sans vague SVG, titre factuel
+  *"Une maison à Salazie, à quatre kilomètres du Cirque"*
+- Nouvelle section intro éditoriale (rupture du pattern eyebrow/titre/p)
+- Layout "Le lieu" asymétrique (photo plein cadre + fiche identité magazine)
+- Section petit-déjeuner dédiée (préparée par Françoise, horaires concrets)
+- 8 cards services → paragraphe + liste compacte à tirets
+- Outro template (feuille centrée + italique) supprimée
+- 4 palmes en fond → 2, opacité réduite
+
+### Workflow des branches (à savoir pour les prochaines sessions)
+
+- **`main`** = ce qui est publié sur GitHub Pages (V1 + V1.1)
+- **`v2-direction`** = la V2, jamais publiée tant qu'on ne fusionne pas
+- Le dossier local `Chez Framboise` est UN seul dossier qui se métamorphose
+  selon la branche active. Pour basculer :
+  ```powershell
+  git checkout main           # le dossier devient V1
+  git checkout v2-direction   # le dossier devient V2
+  ```
+- L'ancien dossier `Chez Framboise V2` sur le bureau a été supprimé : la V2
+  vit maintenant dans la branche.
+
+**Pour publier la V2** (si décision finale) :
+```powershell
+git checkout main
+git merge v2-direction
+git push
+```
+
+### Idées en attente
+
+- Madagascar plus explicite dans le texte (si Françoise et Fred changent d'avis)
+- WebP/AVIF, page "Les environs", carte Leaflet, mode sombre, CMS léger
 
 ---
 
 ## 💬 Pour la prochaine session
 
-**Reprends ici** : on est en attente de la décision de l'utilisateur sur le clin d'œil Madagascar (option 1 à 5 ou combinaison). Une fois validée, l'implémenter, committer, pousser.
+**Reprends ici** : V1.1 en ligne sur `main`, V2 archivée sur la branche
+`v2-direction`. En attente de la **décision du propriétaire** entre :
+1. Garder la V1.1 et itérer dessus
+2. Fusionner la V2 dans `main` pour la publier
+3. Mélanger : prendre des éléments de la V2 et les porter sur `main`
 
-**Vérifier d'abord** : `git status` pour voir si l'utilisateur a fait des modifs manuelles entre deux sessions.
+**Vérifier d'abord** :
+- `git status` (toujours)
+- `git branch` pour voir sur quelle branche on est
+- Demander au propriétaire où il en est de sa réflexion V1/V2
 
 **Ne pas oublier** : mettre à jour ce CLAUDE.md à la fin de la session.
