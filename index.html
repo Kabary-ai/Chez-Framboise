@@ -338,23 +338,103 @@
   .service h3 { font-family: var(--ff-serif); font-size: 1.4rem; font-weight: 500; margin: 0 0 8px; color: var(--ink); }
   .service p { font-size: var(--fs-sm); margin: 0; color: var(--moss); }
 
-  /* ---------- 12. Avis ---------- */
+  /* ---------- 12. Avis (style Booking.com) ---------- */
   .avis { padding: var(--section-y) 0; background: var(--sand); }
-  .avis__grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
-  .avis-card {
-    background: var(--cream);
-    border-radius: var(--radius-md);
-    padding: 32px 28px;
-    display: flex; flex-direction: column; gap: 16px;
-    box-shadow: 0 4px 20px -10px rgba(26,36,32,.15);
-    transition: transform .35s var(--ease), box-shadow .35s var(--ease);
+
+  /* Barre de score globale */
+  .avis__score-bar {
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 20px;
+    background: #fff;
+    border: 1px solid rgba(0,53,128,.12);
+    border-radius: 10px;
+    padding: 24px 28px;
+    margin-bottom: 36px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.06);
   }
-  .avis-card:hover { transform: translateY(-4px); box-shadow: 0 14px 30px -14px rgba(26,36,32,.22); }
-  .avis-card__stars { color: var(--coral); letter-spacing: 2px; font-size: 1rem; }
-  .avis-card p { font-family: var(--ff-serif); font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--ink); margin: 0; }
-  .avis-card footer { margin-top: auto; display: flex; flex-direction: column; gap: 2px; }
-  .avis-card__name { font-weight: 500; color: var(--forest); font-size: var(--fs-sm); }
-  .avis-card__date { font-size: var(--fs-xs); color: var(--bark); }
+  .avis__score-main { display: flex; align-items: center; gap: 18px; }
+  .avis__score-badge {
+    background: #003580; color: #fff;
+    font-size: 2.1rem; font-weight: 700;
+    font-family: var(--ff-sans); line-height: 1;
+    padding: 14px 18px;
+    border-radius: 8px 8px 8px 0;
+    flex: none;
+  }
+  .avis__score-label {
+    font-weight: 700; font-size: 1.2rem; color: var(--ink);
+    margin: 0 0 4px; font-family: var(--ff-sans);
+  }
+  .avis__score-sub { font-size: var(--fs-sm); color: var(--bark); margin: 0; }
+
+  /* Badge "booking.com" */
+  .avis__booking-badge {
+    display: flex; flex-direction: column; align-items: flex-end; gap: 3px;
+    text-decoration: none; color: inherit;
+  }
+  .avis__booking-badge:hover .booking-logo { color: #0071c2; }
+  .booking-logo {
+    font-family: var(--ff-sans); font-size: 1.15rem; font-weight: 700;
+    color: #003580; letter-spacing: -.03em;
+    transition: color .2s var(--ease);
+  }
+  .booking-verified {
+    font-size: var(--fs-xs); color: var(--bark);
+    letter-spacing: .1em; text-transform: uppercase;
+  }
+
+  /* Grille de cards */
+  .avis__grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+
+  /* Card — entièrement cliquable via <a> */
+  .avis-card {
+    background: #fff;
+    border: 1px solid rgba(0,0,0,.09);
+    border-radius: 8px;
+    padding: 24px 22px;
+    display: flex; flex-direction: column; gap: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.05);
+    text-decoration: none; color: inherit;
+    transition: box-shadow .25s var(--ease), transform .25s var(--ease), border-color .25s var(--ease);
+  }
+  .avis-card:hover {
+    box-shadow: 0 10px 28px rgba(0,53,128,.13);
+    transform: translateY(-3px);
+    border-color: rgba(0,113,194,.25);
+  }
+  .avis-card__top {
+    display: flex; align-items: flex-start;
+    justify-content: space-between; gap: 12px;
+  }
+  .avis-card__reviewer { display: flex; align-items: center; gap: 12px; }
+  .avis-card__avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: #003580; color: #fff;
+    font-family: var(--ff-sans); font-weight: 700; font-size: 1rem;
+    display: flex; align-items: center; justify-content: center; flex: none;
+  }
+  .avis-card__name { font-weight: 600; color: var(--ink); font-size: var(--fs-sm); margin: 0 0 2px; font-family: var(--ff-sans); }
+  .avis-card__origin { font-size: var(--fs-xs); color: var(--bark); margin: 0; }
+  .avis-card__score {
+    background: #003580; color: #fff;
+    font-family: var(--ff-sans); font-weight: 700; font-size: .9rem;
+    padding: 5px 10px; border-radius: 6px 6px 6px 0;
+    flex: none; align-self: flex-start;
+    white-space: nowrap;
+  }
+  .avis-card__stars { color: #f5a623; font-size: .85rem; letter-spacing: 2px; }
+  .avis-card__text { font-size: var(--fs-sm); color: var(--ink); line-height: 1.65; margin: 0; font-style: italic; }
+  .avis-card__date { font-size: var(--fs-xs); color: var(--bark); margin: 0; }
+
+  /* CTA global */
+  .avis__cta { margin-top: 40px; text-align: center; }
+  .btn--booking {
+    background: #0071c2; color: #fff; border-color: #0071c2; font-weight: 600;
+  }
+  .btn--booking:hover {
+    background: #005ea2; border-color: #005ea2;
+    box-shadow: 0 10px 24px rgba(0,113,194,.3); transform: translateY(-2px);
+  }
 
   /* ---------- 13. Séjour ---------- */
   .sejour {
@@ -745,30 +825,6 @@
       </div>
     </section>
 
-    <!-- HÔTES -->
-    <section class="hotes">
-      <div class="container hotes__grid">
-        <figure class="hotes__media reveal">
-          <img src="images/21.jpg" alt="Portrait de Françoise et Fred, les hôtes, dans leur jardin tropical" />
-        </figure>
-        <div class="hotes__text reveal">
-          <p class="eyebrow">Vos hôtes</p>
-          <h2 class="title-display"><em>Françoise &amp; Fred</em></h2>
-          <p>
-            Ils accueillent, ils conseillent, ils racontent. Une cuisine du jardin,
-            des sentiers gardés en mémoire, et cette attention discrète qui
-            transforme une chambre en escale.
-          </p>
-          <blockquote class="quote">
-            « L'accueil chaleureux et discret de Françoise et Fred,
-            la propreté du lieu, l'aménagement du logement et le petit-déjeuner
-            fabuleux. »
-            <cite>— Céline, Booking.com</cite>
-          </blockquote>
-        </div>
-      </div>
-    </section>
-
     <!-- GALERIE -->
     <section id="galerie" class="galerie">
       <div class="container">
@@ -857,38 +913,109 @@
       <div class="container">
         <header class="section-head reveal">
           <p class="eyebrow">Avis voyageurs</p>
-          <h2 class="title-display">Ils sont passés <em>par ici</em></h2>
+          <h2 class="title-display">Ce qu'ils ont <em>vécu</em></h2>
         </header>
+
+        <!-- Score global façon Booking.com -->
+        <div class="avis__score-bar reveal">
+          <div class="avis__score-main">
+            <div class="avis__score-badge">9,4</div>
+            <div>
+              <p class="avis__score-label">Exceptionnel</p>
+              <p class="avis__score-sub">Noté par +200 voyageurs</p>
+            </div>
+          </div>
+          <a href="https://www.booking.com/hotel/re/chez-framboise.fr.html"
+             target="_blank" rel="noopener" class="avis__booking-badge"
+             aria-label="Voir les avis sur Booking.com">
+            <span class="booking-logo">booking.com</span>
+            <span class="booking-verified">Avis vérifiés</span>
+          </a>
+        </div>
+
+        <!-- Cards — chacune est un lien cliquable vers Booking -->
         <div class="avis__grid">
-          <article class="avis-card reveal">
-            <div class="avis-card__stars" aria-label="Note 5 sur 5">★ ★ ★ ★ ★</div>
-            <p>« La gentillesse des hôtes, les conseils et recommandations
-              et le petit déjeuner était superbe. »</p>
-            <footer>
-              <span class="avis-card__name">Jean</span>
-              <span class="avis-card__date">Mars 2026</span>
-            </footer>
-          </article>
-          <article class="avis-card reveal">
-            <div class="avis-card__stars" aria-label="Note 5 sur 5">★ ★ ★ ★ ★</div>
-            <p>« Petit déjeuner et table d'hôte extras ! Très bon séjour,
-              hôtes attentifs qui prennent le temps de répondre à nos questions
-              et à donner des conseils. Tout était parfait. »</p>
-            <footer>
-              <span class="avis-card__name">Valérie</span>
-              <span class="avis-card__date">Février 2026</span>
-            </footer>
-          </article>
-          <article class="avis-card reveal">
-            <div class="avis-card__stars" aria-label="Note 5 sur 5">★ ★ ★ ★ ★</div>
-            <p>« L'accueil chaleureux et discret de Françoise et Fred,
-              la propreté du lieu, l'aménagement du logement et le petit
-              déjeuner fabuleux. »</p>
-            <footer>
-              <span class="avis-card__name">Céline</span>
-              <span class="avis-card__date">Février 2026</span>
-            </footer>
-          </article>
+          <a href="https://www.booking.com/hotel/re/chez-framboise.fr.html"
+             target="_blank" rel="noopener" class="avis-card reveal">
+            <div class="avis-card__top">
+              <div class="avis-card__reviewer">
+                <div class="avis-card__avatar" aria-hidden="true">J</div>
+                <div>
+                  <p class="avis-card__name">Jean</p>
+                  <p class="avis-card__origin">🇫🇷 France</p>
+                </div>
+              </div>
+              <span class="avis-card__score">10</span>
+            </div>
+            <div class="avis-card__stars" aria-label="Note 10 sur 10">★★★★★</div>
+            <p class="avis-card__text">« La gentillesse des hôtes, les conseils et recommandations et le petit déjeuner était superbe. »</p>
+            <p class="avis-card__date">Mars 2026</p>
+          </a>
+
+          <a href="https://www.booking.com/hotel/re/chez-framboise.fr.html"
+             target="_blank" rel="noopener" class="avis-card reveal">
+            <div class="avis-card__top">
+              <div class="avis-card__reviewer">
+                <div class="avis-card__avatar" aria-hidden="true">V</div>
+                <div>
+                  <p class="avis-card__name">Valérie</p>
+                  <p class="avis-card__origin">🇫🇷 France</p>
+                </div>
+              </div>
+              <span class="avis-card__score">10</span>
+            </div>
+            <div class="avis-card__stars" aria-label="Note 10 sur 10">★★★★★</div>
+            <p class="avis-card__text">« Petit déjeuner et table d'hôte extras ! Très bon séjour, hôtes attentifs qui prennent le temps de répondre à nos questions et à donner des conseils. Tout était parfait. »</p>
+            <p class="avis-card__date">Février 2026</p>
+          </a>
+
+          <a href="https://www.booking.com/hotel/re/chez-framboise.fr.html"
+             target="_blank" rel="noopener" class="avis-card reveal">
+            <div class="avis-card__top">
+              <div class="avis-card__reviewer">
+                <div class="avis-card__avatar" aria-hidden="true">C</div>
+                <div>
+                  <p class="avis-card__name">Céline</p>
+                  <p class="avis-card__origin">🇫🇷 France</p>
+                </div>
+              </div>
+              <span class="avis-card__score">10</span>
+            </div>
+            <div class="avis-card__stars" aria-label="Note 10 sur 10">★★★★★</div>
+            <p class="avis-card__text">« L'accueil chaleureux et discret de Françoise et Fred, la propreté du lieu, l'aménagement du logement et le petit déjeuner fabuleux. »</p>
+            <p class="avis-card__date">Février 2026</p>
+          </a>
+        </div>
+
+        <div class="avis__cta reveal">
+          <a href="https://www.booking.com/hotel/re/chez-framboise.fr.html"
+             target="_blank" rel="noopener" class="btn btn--booking">
+            Lire tous les avis sur Booking.com →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- HÔTES -->
+    <section class="hotes">
+      <div class="container hotes__grid">
+        <figure class="hotes__media reveal">
+          <img src="images/21.jpg" alt="Portrait de Françoise et Fred, les hôtes, dans leur jardin tropical" />
+        </figure>
+        <div class="hotes__text reveal">
+          <p class="eyebrow">Vos hôtes</p>
+          <h2 class="title-display"><em>Françoise &amp; Fred</em></h2>
+          <p>
+            Ils accueillent, ils conseillent, ils racontent. Une cuisine du jardin,
+            des sentiers gardés en mémoire, et cette attention discrète qui
+            transforme une chambre en escale.
+          </p>
+          <blockquote class="quote">
+            « L'accueil chaleureux et discret de Françoise et Fred,
+            la propreté du lieu, l'aménagement du logement et le petit-déjeuner
+            fabuleux. »
+            <cite>— Céline, Booking.com</cite>
+          </blockquote>
         </div>
       </div>
     </section>
