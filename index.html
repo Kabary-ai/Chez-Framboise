@@ -679,6 +679,16 @@
   @keyframes sway-b { 0%, 100% { transform: rotate(2deg); }  50% { transform: rotate(-4deg); } }
   @keyframes sway-c { 0%, 100% { transform: rotate(-2deg); } 50% { transform: rotate(4deg); } }
   @keyframes sway-d { 0%, 100% { transform: rotate(3deg); }  50% { transform: rotate(-3deg); } }
+  /* Tablette ~4-5° */
+  @keyframes sway-a-md { 0%, 100% { transform: rotate(-4.5deg); } 50% { transform: rotate(4.5deg); } }
+  @keyframes sway-b-md { 0%, 100% { transform: rotate(3.5deg); }  50% { transform: rotate(-5deg);   } }
+  @keyframes sway-c-md { 0%, 100% { transform: rotate(-3deg);   } 50% { transform: rotate(5deg);    } }
+  @keyframes sway-d-md { 0%, 100% { transform: rotate(4deg);    } 50% { transform: rotate(-4.5deg); } }
+  /* Mobile ~6-8° */
+  @keyframes sway-a-sm { 0%, 100% { transform: rotate(-6deg); } 50% { transform: rotate(6deg);  } }
+  @keyframes sway-b-sm { 0%, 100% { transform: rotate(5deg);  } 50% { transform: rotate(-7deg); } }
+  @keyframes sway-c-sm { 0%, 100% { transform: rotate(-5deg); } 50% { transform: rotate(7deg);  } }
+  @keyframes sway-d-sm { 0%, 100% { transform: rotate(6deg);  } 50% { transform: rotate(-6deg); } }
 
   /* Le contenu principal passe au-dessus des palmes */
   main, .footer { position: relative; z-index: 1; }
@@ -731,6 +741,32 @@
     .stats__num { font-size: 1.8rem; }
     .btn { padding: 12px 22px; font-size: var(--fs-xs); }
     .quote { padding: 20px 22px; font-size: 1rem; }
+  }
+
+  /* === Palmes : plus grandes et plus animées sur petits écrans === */
+  /* Tablette (640–899 px) */
+  @media (max-width: 899.98px) {
+    .palm        { opacity: .18; }
+    .palm--1     { width: 70vmin; height: 70vmin; top: -14vmin; right: -16vmin; }
+    .palm--2     { width: 75vmin; height: 75vmin; bottom: -16vmin; left: -14vmin; }
+    .palm--3     { width: 60vmin; height: 60vmin; right: -22vmin; }
+    .palm--4     { width: 55vmin; height: 55vmin; left: -18vmin; }
+    .palm--1 svg { animation-name: sway-a-md; }
+    .palm--2 svg { animation-name: sway-b-md; }
+    .palm--3 svg { animation-name: sway-c-md; }
+    .palm--4 svg { animation-name: sway-d-md; }
+  }
+  /* Mobile (< 640 px) */
+  @media (max-width: 639.98px) {
+    .palm        { opacity: .24; }
+    .palm--1     { width: 90vmin; height: 90vmin; top: -20vmin; right: -22vmin; }
+    .palm--2     { width: 95vmin; height: 95vmin; bottom: -22vmin; left: -20vmin; }
+    .palm--3     { width: 74vmin; height: 74vmin; right: -28vmin; }
+    .palm--4     { width: 68vmin; height: 68vmin; left: -24vmin; }
+    .palm--1 svg { animation-name: sway-a-sm; }
+    .palm--2 svg { animation-name: sway-b-sm; }
+    .palm--3 svg { animation-name: sway-c-sm; }
+    .palm--4 svg { animation-name: sway-d-sm; }
   }
   </style>
 </head>
