@@ -49,9 +49,10 @@ Site vitrine pour **Chez Framboise**, une chambre d'hôtes située à **Salazie*
 
 - **Aucun framework** : HTML5 + CSS3 + JS vanilla
 - **Tout est dans `index.html`** : CSS inline dans `<style>`, JS inline dans `<script>` (les fichiers `style.css` et `script.js` séparés existent mais sont des reliquats, non utilisés)
-- **Dev local** : serveur HTTP via `py -m http.server 8080` (config dans `.claude/launch.json`, ignorée par git)
-- **Runtimes installés** : Git 2.54, Python 3.11 (via `py`). PAS de Node, npm, php
-- **Preview Claude Code** : utiliser `mcp__Claude_Preview__preview_start` avec le nom "Chez Framboise — site statique"
+- **Machine de travail actuelle** : `D:\KABARY_AI\` (poste de Garry, Windows 11 FR, PowerShell 7+). Node/npx disponibles ici (contrairement à l'ancien poste).
+- **Dev local** : `py -m http.server 8080` ou `npx serve -l 3001 .` (config preview dans `.claude/launch.json`, gitignorée : `v1-main` port 3001, `v2-direction` port 3003)
+- **Preview Claude Code** : `mcp__Claude_Preview__preview_start` (le screenshot rend petit → privilégier `preview_eval` pour mesurer la géométrie / vérifier le DOM)
+- **Doc dépôt** : `README.md` (présentation publique) + ce `CLAUDE.md` (mémoire interne)
 
 ## 📁 Structure des fichiers
 
