@@ -27,10 +27,21 @@ Site vitrine pour **Chez Framboise**, une chambre d'hôtes située à **Salazie*
 
 | Quoi | Où |
 |---|---|
-| Dossier local | `C:\Users\Utilisateur\Desktop\Chez Framboise` |
-| Dépôt GitHub | https://github.com/Devenherbe974/Chez-Framboise |
-| Site en production (GitHub Pages) | https://devenherbe974.github.io/Chez-Framboise/ |
+| Dossier local (main) | `D:\KABARY_AI\Projets\Chez-Framboise-main` |
+| Worktree V2 | `D:\KABARY_AI\Projets\Chez-Framboise-v2` (branche `v2-direction`) |
+| Dépôt GitHub | https://github.com/Kabary-ai/Chez-Framboise |
+| **Site en production** | **https://chezframboise.re** (Hostinger, FTP auto via GitHub Actions) |
+| Ancien dépôt (à archiver) | https://github.com/Devenherbe974/Chez-Framboise (plus utilisé) |
 | Réservation Booking | https://www.booking.com/hotel/re/chez-framboise.fr.html |
+
+### 🚀 Déploiement (chezframboise.re)
+
+- **Méthode** : GitHub Actions → FTP vers Hostinger (hébergement mutualisé LiteSpeed). Chaque `git push` sur `main` déploie le site en ~15 s.
+- **Workflow** : `.github/workflows/deploy.yml` (action `SamKirkland/FTP-Deploy-Action`, pas de build — HTML statique pur).
+- **Secrets GitHub** (repo Kabary-ai/Chez-Framboise) : `FTP_SERVER` (72.60.93.193), `FTP_USERNAME` (u415647617.chezframboise.re), `FTP_PASSWORD`.
+- **Compte FTP** scopé sur le dossier web → `server-dir: ./` atterrit directement dans la racine web. SSL gratuit + Force HTTPS actifs côté Hostinger.
+- **`.htaccess`** : no-cache HTML, cache long images/assets, gzip.
+- Déploiement manuel possible : `gh workflow run deploy.yml --repo Kabary-ai/Chez-Framboise`.
 
 ---
 
@@ -246,24 +257,47 @@ git merge v2-direction
 git push
 ```
 
+### V1.2 — EN LIGNE sur chezframboise.re (session 4)
+
+Décision du propriétaire : **on garde la V1 et on itère dessus** (la V2 reste
+archivée sur `v2-direction`, non publiée). Mise en production sur le domaine
+dédié **chezframboise.re** (Hostinger).
+
+Modifications V1.2 (sur `main`) :
+- Section "Bienvenue" : *"Une chambre lumineuse"* (au lieu du pluriel)
+- Galerie : photo `chambre 1.jpg` retirée du site ; refonte du layout en
+  placement explicite **sans trous** (cascade verticale en grand à gauche +
+  4 carrés ; rectangle plein à tous les breakpoints) — fini l'effet quinconce
+- Services : suppression des cases **Accès PMR** et **Conseils sur-mesure** ;
+  grille passée en **3×2 parfaitement alignée** (était 4+2)
+- Séjour & tarifs : mot *"continental"* retiré du petit-déjeuner
+- Footer : **import du footer V2** (signature tricolore discrète ivoire/framboise/forest)
+- Contact : carte statique → **iframe Google Maps interactif** (zoom, Street View,
+  itinéraire), gratuit sans clé API, `output=embed` sur les coords GPS
+- **Infra** : dépôt déplacé sous le compte `Kabary-ai`, déploiement FTP auto vers
+  Hostinger (voir section Déploiement en haut)
+
 ### Idées en attente
 
 - Madagascar plus explicite dans le texte (si Françoise et Fred changent d'avis)
 - WebP/AVIF, page "Les environs", carte Leaflet, mode sombre, CMS léger
+- Nettoyer `images/chambre 1.jpg` (asset désormais inutilisé) + reliquats `style.css`/`script.js`
+- Archiver/supprimer l'ancien dépôt `Devenherbe974/Chez-Framboise`
 
 ---
 
 ## 💬 Pour la prochaine session
 
-**Reprends ici** : V1.1 en ligne sur `main`, V2 archivée sur la branche
-`v2-direction`. En attente de la **décision du propriétaire** entre :
-1. Garder la V1.1 et itérer dessus
-2. Fusionner la V2 dans `main` pour la publier
-3. Mélanger : prendre des éléments de la V2 et les porter sur `main`
+**Reprends ici** : **V1.2 EN LIGNE sur https://chezframboise.re** (branche `main`,
+dépôt `Kabary-ai/Chez-Framboise`). Déploiement auto par push. V2 toujours archivée
+sur `v2-direction` (non publiée, décision = on itère sur la V1).
 
 **Vérifier d'abord** :
-- `git status` (toujours)
-- `git branch` pour voir sur quelle branche on est
-- Demander au propriétaire où il en est de sa réflexion V1/V2
+- `git status` et `git branch` (toujours)
+- Le remote doit pointer sur `Kabary-ai/Chez-Framboise` (`git remote -v`)
+- Tester le site live : `curl.exe -I https://chezframboise.re/`
+
+**Pour déployer une modif** : éditer → `git push` sur `main` → en ligne en ~15 s.
+Suivi : `gh run list --repo Kabary-ai/Chez-Framboise`.
 
 **Ne pas oublier** : mettre à jour ce CLAUDE.md à la fin de la session.
