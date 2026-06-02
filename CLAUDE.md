@@ -277,6 +277,10 @@ Modifications V1.2 (sur `main`) :
   itinéraire), gratuit sans clé API, `output=embed` sur les coords GPS
 - **Infra** : dépôt déplacé sous le compte `Kabary-ai`, déploiement FTP auto vers
   Hostinger (voir section Déploiement en haut)
+- **SEO** : ajout de `robots.txt` + `sitemap.xml` (à soumettre dans Google Search
+  Console), balises `canonical` / Open Graph / Twitter Card / geo, et données
+  structurées **schema.org `BedAndBreakfast`** (note 9,4/10, géoloc, équipements)
+  dans le `<head>` de `index.html`. Site une seule page → sitemap = 1 URL (`/`).
 
 ### Idées en attente
 
