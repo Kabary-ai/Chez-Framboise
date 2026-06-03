@@ -37,7 +37,7 @@ Site vitrine pour **Chez Framboise**, une chambre d'hôtes située à **Salazie*
 ### 🚀 Déploiement (chezframboise.re)
 
 - **Méthode** : GitHub Actions → FTP vers Hostinger (hébergement mutualisé LiteSpeed). Chaque `git push` sur `main` déploie le site en ~15 s.
-- **Workflow** : `.github/workflows/deploy.yml` (action `SamKirkland/FTP-Deploy-Action`, pas de build — HTML statique pur).
+- **Workflow** : `.github/workflows/deploy.yml` (action `SamKirkland/FTP-Deploy-Action`, pas de build — HTML statique pur). **3 tentatives** avec `timeout: 120000` (120 s) + pauses 15 s / 30 s entre les essais — le FTP Hostinger tombe régulièrement en *« Timeout (control socket) »* (instable). Si les 3 échouent, relance manuelle (voir dernière puce).
 - **Secrets GitHub** (repo Kabary-ai/Chez-Framboise) : `FTP_SERVER` (72.60.93.193), `FTP_USERNAME` (u415647617.chezframboise.re), `FTP_PASSWORD`.
 - **Compte FTP** scopé sur le dossier web → `server-dir: ./` atterrit directement dans la racine web. SSL gratuit + Force HTTPS actifs côté Hostinger.
 - **`.htaccess`** : no-cache HTML, cache long images/assets, gzip.
@@ -282,18 +282,49 @@ Modifications V1.2 (sur `main`) :
   structurées **schema.org `BedAndBreakfast`** (note 9,4/10, géoloc, équipements)
   dans le `<head>` de `index.html`. Site une seule page → sitemap = 1 URL (`/`).
 
+### V1.3 — EN LIGNE sur chezframboise.re (session 5)
+
+Modifs issues d'un **retour direct de Françoise & Fred** (par message) + demandes du propriétaire.
+
+- **Localisation corrigée** (gros point) : la maison est **DANS le Cirque, à la
+  Mare à Poule d'eau** — pas « à 4,4 km du Cirque ». Les 4,4 km concernent les
+  **départs de sentiers**. Et le **bassin de la Mare à Poule d'eau** (site
+  touristique emblématique de Salazie) est à **5 min à pied** → valorisé.
+  - Carte « Randonnée à proximité » : *« À 5 min à pied de la Mare à Poule d'eau,
+    site emblématique de Salazie, et à 4,4 km des départs de sentiers. »*
+  - Texte « Bienvenue » : *« au cœur du Cirque de Salazie […] La célèbre Mare à
+    Poule d'eau […] se découvre à cinq minutes à pied. »*
+  - SEO (og / twitter / schema.org) : corrigé la contradiction « dans le Cirque /
+    à 4,4 km du Cirque ».
+- **Favicon** ajouté (Google affichait le globe générique faute de favicon) :
+  - `favicon.svg` = feuille crème + veine + **baie framboise** sur fond vert forêt
+    (reprend la marque de l'en-tête, lisible en 16 px et en mode sombre).
+  - `favicon.ico` multi-tailles (16/32/48), `apple-touch-icon.png` (180), balises
+    `<link>` + `theme-color` dans le `<head>`. Source régénérable depuis le `.svg`
+    via Node (`sharp` + `png-to-ico`).
+  - ⏳ Google met à jour le favicon des résultats de recherche au prochain crawl
+    (quelques jours → 2-3 semaines), pas immédiat.
+- **Section Séjour** : suppression de la note *« Table d'hôtes ponctuellement sur
+  demande… »* (et son trait de séparation). NB : la règle CSS `.sejour__note`
+  est désormais morte (inoffensive, à nettoyer un jour).
+- **Footer** : mention discrète *« Site réalisé par **KABARY AI** »* sous le
+  copyright (texte simple, sans lien — choix du propriétaire).
+- **Déploiement fiabilisé** : workflow passé de 2 → **3 tentatives** avec
+  `timeout: 120000` (120 s) + pauses 15 s / 30 s. Le FTP Hostinger timeoutait
+  systématiquement (« control socket ») et obligeait à relancer à la main.
+
 ### Idées en attente
 
 - Madagascar plus explicite dans le texte (si Françoise et Fred changent d'avis)
 - WebP/AVIF, page "Les environs", carte Leaflet, mode sombre, CMS léger
-- Nettoyer `images/chambre 1.jpg` (asset désormais inutilisé) + reliquats `style.css`/`script.js`
+- Nettoyer `images/chambre 1.jpg` (asset inutilisé) + reliquats `style.css`/`script.js` + CSS mort `.sejour__note`
 - Archiver/supprimer l'ancien dépôt `Devenherbe974/Chez-Framboise`
 
 ---
 
 ## 💬 Pour la prochaine session
 
-**Reprends ici** : **V1.2 EN LIGNE sur https://chezframboise.re** (branche `main`,
+**Reprends ici** : **V1.3 EN LIGNE sur https://chezframboise.re** (branche `main`,
 dépôt `Kabary-ai/Chez-Framboise`). Déploiement auto par push. V2 toujours archivée
 sur `v2-direction` (non publiée, décision = on itère sur la V1).
 

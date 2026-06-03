@@ -13,8 +13,9 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v4
 
-      - name: Deploy via FTP 📂
-        id: ftp_deploy
+      # ----- Tentative 1 -----
+      - name: Deploy via FTP (tentative 1) 📂
+        id: t1
         continue-on-error: true
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
@@ -24,7 +25,7 @@ jobs:
           server-dir: ${{ secrets.FTP_SERVER_DIR || './' }}
           local-dir: ./
           dangerous-clean-slate: false
-          # On n'envoie que le site : on exclut le dev, les scripts et la doc.
+          timeout: 120000 # 120 s — Hostinger ferme parfois la socket de contrôle trop tôt
           exclude: |
             **/.git*
             **/.git*/**
@@ -36,9 +37,15 @@ jobs:
             **/style.css
             **/script.js
 
-      # Retry automatique si le premier essai tombe en timeout (Hostinger FTP instable)
-      - name: Retry Deploy via FTP (tentative 2) 📂
-        if: steps.ftp_deploy.outcome == 'failure'
+      # ----- Tentative 2 (si la 1 a échoué) -----
+      - name: Pause avant tentative 2 ⏳
+        if: steps.t1.outcome == 'failure'
+        run: sleep 15
+
+      - name: Deploy via FTP (tentative 2) 📂
+        id: t2
+        if: steps.t1.outcome == 'failure'
+        continue-on-error: true
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
@@ -47,6 +54,34 @@ jobs:
           server-dir: ${{ secrets.FTP_SERVER_DIR || './' }}
           local-dir: ./
           dangerous-clean-slate: false
+          timeout: 120000
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github/**
+            **/.claude/**
+            **/*.ps1
+            **/CLAUDE.md
+            **/README.md
+            **/style.css
+            **/script.js
+
+      # ----- Tentative 3 (si la 2 a échoué) — dernière chance, fait échouer le run -----
+      - name: Pause avant tentative 3 ⏳
+        if: steps.t2.outcome == 'failure'
+        run: sleep 30
+
+      - name: Deploy via FTP (tentative 3) 📂
+        if: steps.t2.outcome == 'failure'
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ secrets.FTP_SERVER_DIR || './' }}
+          local-dir: ./
+          dangerous-clean-slate: false
+          timeout: 120000
           exclude: |
             **/.git*
             **/.git*/**
